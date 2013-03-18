@@ -70,7 +70,7 @@
 <script type="text/javascript" src="antie/static/script/lib/require.js"></script>
 
 <!-- Load application base style sheet -->
-<link rel="stylesheet" href="static/style/layout.css" />
+<link rel="stylesheet" href="static/style/base.css" />
 
 <!-- Expose device config to framework -->
 <script>
