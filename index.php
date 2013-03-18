@@ -13,7 +13,7 @@
     // Get device config name from url parameter, or use html.
     // Determine the path to the device config file.
     $device_configuration_key = isset($_GET['config']) ? $_GET['config'] : 'html5';
-    $device_configuration_file_path = "config/$device_configuration_key.json";
+    $device_configuration_file_path = $antie_config_path . "/devices/$device_configuration_key.json";
     
     // Load device configuration file
     try {
