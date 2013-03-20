@@ -1,0 +1,44 @@
+/* RESOLUTION SPECIFIC STYLES - 1280px X 720px */
+
+/* Application in Center-Middle of Screen (achieved by positioning 50% down from top AND shifting back up to origin by half height) */
+#app {
+    position: relative;
+    overflow: hidden;
+    width: 1280px;
+    height: 720px;
+    top: 50%;
+    margin: -360px auto 0 auto;
+    background-image: url(../../img/bbc_background_720.png);
+}
+
+#helloWorldLabel, #welcomeLabel {
+    display: block;
+    text-align: center;
+}
+
+#helloWorldLabel {
+    font-size: 60px;
+    padding-top: 228px;
+    font-weight: bold;
+}
+
+#welcomeLabel {
+    font-size: 26px;
+}
+
+#simplecarousel_mask {
+    top: 156px;
+}
+
+.description {
+    top: 65px;
+    font-size: 26px;
+}
+
+#playerButtons {
+    bottom: 39px;
+    width: 780px;
+    padding: 10px;
+    left: 235px;
+}
+
