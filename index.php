@@ -25,35 +25,46 @@
  * Please contact us for an alternative licence
  */
 
+ 
+ 
+// INIT AND CONFIG LOAD
 
-// First check TAL is available before starting
+// Check TAL is available
 if (!file_exists('antie/php/antieframework.php')) {
-    echo "<h2>Antie  error</h2><h4>AntieFramework.php can not be found. Please ensure TAL is located in the root directory</h4>";
+    echo "<h2>Framework error</h2>";
+    echo "<h4>antieframework.php can not be found.</h4>";
+    echo "<h4>Please install TAL to a folder 'antie' in your application's root</h4>";
     exit;
 }
 
 require('antie/php/antieframework.php');
 
-// set up application ID and path to antie config, create an AntieFramework instance
+// Set up application ID and path to framework configuration directory
 $application_id = "sampleapp";
 $antie_config_path = 'antie/config';
+
+// Create an AntieFramework instance
 $antie = new AntieFramework($antie_config_path);
 
+// Get brand and model from url parameters, or use 
+// brand = default, model = webkit
+$device_brand = isset($_GET['brand'])? $_GET['brand'] : 'default';
+$device_model = isset($_GET['model'])? $_GET['model'] : 'webkit';
 
-// Detect the device and fall back to google chrome if a device is not specificed in the URL (for development purposes)
-$device_brand = isset($_GET['brand'])? $_GET['brand'] : 'html5';
-$device_model = isset($_GET['model'])? $_GET['model'] : 'base';
-
+// Normalises to lower case with spaces replaced by underscores
 $device_brand = $antie->normaliseKeyNames($device_brand);
 $device_model = $antie->normaliseKeyNames($device_model);
 
-$device_configuration_key = "$device_brand-$device_model";
-$device_configuration_file_path = $antie_config_path . "/devices/$device_configuration_key-default.json";
+// Framework device config files in format BRAND-MODEL-default.json 
+// Construct filename from this and config path
+$device_configuration_name = $device_brand . "-" . $device_model;
+$device_configuration_file_path = $antie_config_path . "/devices/" . $device_configuration_name . "-default.json";
 
+// Load in device configuration
 try {
     $device_configuration = @file_get_contents($device_configuration_file_path);
     if(!$device_configuration)
-        throw new Exception("Device ($device_configuration_key) not supported");
+        throw new Exception("Device ($device_configuration_name) not supported");
 } catch(Exception $e){
     echo $e->getMessage(); exit;
 }
@@ -64,13 +75,21 @@ $device_configuration = preg_replace('/%application%/m', $application_id, $devic
 // Decode to php object
 $device_configuration_decoded = json_decode($device_configuration);
 
+
+
+// PAGE GENERATION
+
 // Set document mime type
 header("Content-Type: " . $antie->getMimeType($device_configuration_decoded));
 
-// set doctype and opening html tag
+// Set doctype and opening html tag
 echo $antie->getDocType($device_configuration_decoded);
 echo $antie->getRootHtmlTag($device_configuration_decoded);
 ?>
+
+
+
+<!-- HEAD -->
 
 <head>
     <!-- Device specific head block (API loading etc) -->
@@ -86,16 +105,13 @@ echo $antie->getRootHtmlTag($device_configuration_decoded);
                 <?php echo $application_id; ?>: 'static/script',
                 antie : "antie/static/script"
             },
-            priority: [
-            ],
-            callback: function() {
-                /* Add the static host URL to JS configuration here */
-            }
+            priority: [],
+            callback: function() {}
         };
     </script>
 
     <!-- Load require.js -->
-    <script type="text/javascript" src="/antie/static/script/lib/require.js"></script>
+    <script type="text/javascript" src="antie/static/script/lib/require.js"></script>
 
     <!-- Load application base style sheet -->
     <link rel="stylesheet" href="static/style/base.css"/>
@@ -111,6 +127,10 @@ echo $antie->getRootHtmlTag($device_configuration_decoded);
 
 </head>
 
+
+
+<!-- BODY -->
+
 <body style="background: #000;">
 
 <!-- Add in device specific body (Plugins etc) -->
@@ -124,7 +144,7 @@ echo $antie->getRootHtmlTag($device_configuration_decoded);
 <!-- Create a div to house the app -->
 <div id="app" class="display-none"></div>
 
-<!-- Load the application and launch, remove loadingscreen via callback -->
+<!-- Load the application and launch, remove loading screen via callback -->
 <script type='text/javascript'>
     require(
             [
