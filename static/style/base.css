@@ -1,5 +1,3 @@
-/* GENERAL DEFAULTS -------------------------- */
-
 /* Document */
 html {
     height: 100%;
@@ -9,6 +7,7 @@ body {
     height: 100%; 
     margin: 0;
     padding: 0;
+    color: #ffffff;
 }
 
 /* List widgets */
@@ -53,7 +52,7 @@ body {
 }
 
 
-/* DEVICE SPECIFIC DEFAULTS ------------------ */
+/* DEVICE SPECIFIC DEFAULTS */
 
 /* if you target some consoles you may need to add additional styles like this */
 .someConsoles .horizontallist .listitem {
