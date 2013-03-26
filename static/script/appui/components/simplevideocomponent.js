@@ -91,7 +91,7 @@ require.def("sampleapp/appui/components/simplevideocomponent",
 
             _onBeforeRender: function (ev) {
                 // Create a video player
-                var videoUrl = "";
+                var videoUrl = "static/mp4/spinning-logo.mp4";
                 var videoType = "video/mp4";
 
                 // Create the device's video object, set the media sources and start loading the media
