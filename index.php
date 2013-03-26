@@ -39,6 +39,9 @@ if (!file_exists('antie/php/antieframework.php')) {
 
 require('antie/php/antieframework.php');
 
+// Enable javascript cache busting (this should be disabled in production mode)
+$javascript_cache_busting = true;
+
 // Set up application ID and path to framework configuration directory
 $application_id = "sampleapp";
 $antie_config_path = 'antie/config';
@@ -106,6 +109,9 @@ echo $antie->getRootHtmlTag($device_configuration_decoded);
                 antie : "antie/static/script"
             },
             priority: [],
+            <?php if($javascript_cache_busting): ?>
+                urlArgs: "bust=" +  (new Date()).getTime(),
+            <?php endif; ?>
             callback: function() {}
         };
     </script>
