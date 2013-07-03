@@ -26,12 +26,18 @@
  
 var http = require('http');
 var url = require('url');
-var fs = require("fs");
+var fs = require('fs');
 var path = require('path');
  
 // INIT AND CONFIG LOAD
 function returnResponse(url, response)
 {
+	//Check TAL is available
+	if (!fs.existsSync('./antie/node/antieframework.js')) {
+    	response.write("antieframework.js can not be found.");
+    	response.write("Please install TAL to a folder 'antie' in your application's root");
+	}
+	
 	// Check TAL is available
     var AntieFramework = require('./antie/node/antieframework.js');
 
@@ -73,7 +79,6 @@ function returnResponse(url, response)
 	var device_configuration_name = device_brand + "-" + device_model;
 	var device_configuration_file_path = "/devices";
 
-
 	// Load in device configuration
 	try
 	{
@@ -98,11 +103,7 @@ function returnResponse(url, response)
 
 
 	// PAGE GENERATION
-
-	//Set doctype and opening html tag
-    //response.write(antie.getDocType(device_configuration_decoded));
-    //response.write(antie.getRootHtmlTag(device_configuration_decoded));
-
+	
 	response.write("<head>");
 	response.write(antie.getDeviceHeaders(device_configuration_decoded));
 
@@ -188,7 +189,6 @@ http.createServer(function (req, res) {
                 break;
             }
             else{
-                //console.log(path);
                 res.contentType = 'image/png';
                 res.write(fs.readFileSync(__dirname + path));
                 res.end();
