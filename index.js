@@ -43,8 +43,8 @@ function returnResponse(url, response)
 
 	// Set up application ID and path to framework configuration directory
 	var application_id = "sampleapp";
-	var configPath = "antie/node/config";
-	var frameworkPath = "antie/node/config/framework/";
+	var configPath = "antie/config";
+	var frameworkPath = "antie/config/framework/";
 
 	var antie = new AntieFramework(configPath, frameworkPath);
 
