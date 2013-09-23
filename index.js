@@ -23,12 +23,12 @@
  * All rights reserved
  * Please contact us for an alternative licence
  */
- 
+
 var http = require('http');
 var url = require('url');
 var fs = require('fs');
 var path = require('path');
- 
+
 // INIT AND CONFIG LOAD
 function returnResponse(url, response)
 {
@@ -37,7 +37,7 @@ function returnResponse(url, response)
     	response.write("antieframework.js can not be found.");
     	response.write("Please install TAL to a folder 'antie' in your application's root");
 	}
-	
+
 	// Check TAL is available
     var AntieFramework = require('./antie/node/antieframework.js');
 
@@ -48,7 +48,7 @@ function returnResponse(url, response)
 
 	var antie = new AntieFramework(configPath, frameworkPath);
 
-	// Get brand and model from url parameters, or use 
+	// Get brand and model from url parameters, or use
 	// brand = default, model = webkit
 	var device_brand = "default";
 	var device_model = "webkit";
@@ -74,7 +74,7 @@ function returnResponse(url, response)
 	device_brand = antie.normaliseKeyNames(device_brand);
 	device_model = antie.normaliseKeyNames(device_model);
 
-	// Framework device config files in format BRAND-MODEL-default.json 
+	// Framework device config files in format BRAND-MODEL-default.json
 	// Construct filename from this and config path
 	var device_configuration_name = device_brand + "-" + device_model;
 	var device_configuration_file_path = "/devices";
@@ -103,7 +103,7 @@ function returnResponse(url, response)
 
 
 	// PAGE GENERATION
-	
+
 	response.write("<head>");
 	response.write(antie.getDeviceHeaders(device_configuration_decoded));
 
@@ -141,7 +141,7 @@ function returnResponse(url, response)
 	response.write("[");
 			response.write("'sampleapp/appui/sampleapp'");
 	response.write("],");
-	
+
 			response.write("function(SampleApp) {");
 					response.write("require.ready(function() {");
 						response.write("function onReady() {");
@@ -172,28 +172,31 @@ http.createServer(function (req, res) {
   			returnResponse(url.parse(req.url), res);
   			res.end();
             break;
-            
+
         default:
-            if (/\.(css)$/.test(path))
+            if (!fs.existsSync(__dirname + path)) {
+              console.log("HTTP 404: "+ path);
+              res.writeHead(404, {'Content-Type': 'text/html'});
+            }
+
+            else if (/\.(css)$/.test(path))
             {
                 res.writeHead(200, {'Content-Type': 'text/css'});
                 res.write(fs.readFileSync(__dirname + path, 'utf8'));
-                res.end();
-                break;
             }
             else if (/\.(js)$/.test(path))
             {
                 res.writeHead(200, {'Content-Type': 'text/js'});
                 res.write(fs.readFileSync(__dirname + path, 'utf8'));
-                res.end();
-                break;
             }
             else{
                 res.contentType = 'image/png';
                 res.write(fs.readFileSync(__dirname + path));
-                res.end();
-                break;
             }
+
+            res.end();
+
+        break;
 	}
 }).listen(1337, '127.0.0.1');
 console.log('Server running at http://127.0.0.1:1337/');
