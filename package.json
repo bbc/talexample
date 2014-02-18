@@ -1,0 +1,25 @@
+{
+  "name": "talexample",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Example application for the TAL framwork.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fmtvp/talexample.git"
+  },
+  "keywords": [
+    "tal",
+    "talframework",
+    "bbc"
+  ],
+  "author": "BBC Future Media",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/fmtvp/talexample/issues"
+  }
+}
