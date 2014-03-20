@@ -27,9 +27,13 @@ require.def("sampleapp/appui/components/simple",
         "antie/widgets/component",
         "antie/widgets/button",
         "antie/widgets/label",
-        "antie/widgets/verticallist"
+        "antie/widgets/verticallist",
+        "antie/widgets/carousel",
+        "antie/datasource",
+        "sampleapp/appui/formatters/simpleformatter",
+        "sampleapp/appui/datasources/simplefeed"
     ],
-    function (Component, Button, Label, VerticalList) {
+    function (Component, Button, Label, VerticalList, Carousel, DataSource, SimpleFormatter, SimpleFeed) {
         
         // All components extend Component
         return Component.extend({
@@ -52,8 +56,10 @@ require.def("sampleapp/appui/components/simple",
                 carouselButton.addEventListener("select", function(evt){
                     self.getCurrentApplication().pushComponent("maincontainer", "sampleapp/appui/components/simplecarouselcomponent");
                 });
-                carouselButtonLabel = new Label("Simple Carousel Example");
+                carouselButtonLabel = new Label("Simple Horizontal Carousel Example (deprecated)");
                 carouselButton.appendChildWidget(carouselButtonLabel);
+
+                var newCarouselButton = this._createCarouselButton();
 
                 var playerButton = new Button();
                 playerButton.addEventListener("select", function(evt){
@@ -63,6 +69,7 @@ require.def("sampleapp/appui/components/simple",
 
                 // Create a vertical list and append the buttons to navigate within the list
                 verticalListMenu = new VerticalList("mainMenuList");
+                verticalListMenu.appendChildWidget(newCarouselButton);
                 verticalListMenu.appendChildWidget(carouselButton);
                 verticalListMenu.appendChildWidget(playerButton);
                 this.appendChildWidget(verticalListMenu);
@@ -81,12 +88,46 @@ require.def("sampleapp/appui/components/simple",
                 });
             },
 
+            _createCarouselButton: function () {
+                var self = this;
+                function carouselExampleSelected() {
+                    self.getCurrentApplication().pushComponent(
+                        "maincontainer",
+                        "sampleapp/appui/components/carouselcomponent",
+                        self._getCarouselConfig()
+                    );
+                }
+
+                var button = new Button('carouselButton');
+                button.appendChildWidget(new Label("Carousel Example"));
+                button.addEventListener('select', carouselExampleSelected);
+                return button;
+            },
+
+            _getCarouselConfig: function () {
+                return {
+                    dataSource: new DataSource(null, new SimpleFeed(), 'loadData'),
+                    formatter: new SimpleFormatter(),
+                    orientation: Carousel.orientations.HORIZONTAL,
+                    carouselId: 'verticalCullingCarousel',
+                    animOptions: {
+                        skipAnim: false
+                    },
+                    alignment: {
+                        normalisedAlignPoint: 0.5,
+                        normalisedWidgetAlignPoint: 0.5
+                    },
+                    initialItem: 4,
+                    type: "CULLING",
+                    lengths: 216
+                };
+            },
+
             // Appending widgets on beforerender ensures they're still displayed
             // if the component is hidden and subsequently reinstated.
             _onBeforeRender: function () {
 
-
-            } 
+            }
         });
     }
 );
