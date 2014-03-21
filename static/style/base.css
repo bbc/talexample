@@ -233,22 +233,23 @@ initial element background in the base stylesheet, not in dynamically loaded sty
     display: inline-block;
 }
 
-#carouselComponent > .carouselmask.horizontal {
-    width: 500px;
+#carouselComponent {
+    position: relative;
+}
+
+#carouselComponent > .carouselmask {
     margin-left: auto;
     margin-right: auto;
 }
 
-#carouselComponent > .carouselmask.vertical {
-    height: 600px;
-    margin-left: auto;
-    margin-right: auto;
+#carouselComponent > .description {
+    position: static;
 }
 
 .carouselwidgetstrip > .button {
     margin: 0;
     width: 200px;
-    padding: 8px;
+    padding: 32px;
 }
 
 .carouselwidgetstrip.vertical > .button {

@@ -106,6 +106,7 @@ require.def("sampleapp/appui/components/simple",
 
             _getCarouselConfig: function () {
                 return {
+                    description: "Carousel example, LEFT and RIGHT to navigate, SELECT to go back",
                     dataSource: new DataSource(null, new SimpleFeed(), 'loadData'),
                     formatter: new SimpleFormatter(),
                     orientation: Carousel.orientations.HORIZONTAL,
@@ -119,7 +120,7 @@ require.def("sampleapp/appui/components/simple",
                     },
                     initialItem: 4,
                     type: "CULLING",
-                    lengths: 216
+                    lengths: 264
                 };
             },
 

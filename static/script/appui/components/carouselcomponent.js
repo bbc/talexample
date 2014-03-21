@@ -2,6 +2,7 @@ require.def("sampleapp/appui/components/carouselcomponent",
     [
         "antie/widgets/component",
         "antie/datasource",
+        "antie/widgets/label",
         "antie/widgets/carousel",
         "antie/widgets/carousel/binder",
         "antie/widgets/carousel/keyhandlers/activatefirsthandler",
@@ -13,6 +14,7 @@ require.def("sampleapp/appui/components/carouselcomponent",
     function (
         Component,
         DataSource,
+        Label,
         Carousel,
         Binder,
         ActivateFirstHandler,
@@ -34,11 +36,15 @@ require.def("sampleapp/appui/components/carouselcomponent",
             init: function () {
                 this._super('carouselComponent');
                 this._addComponentListeners();
+                this._description = new Label();
+                this._description.addClass('description');
+                this.appendChildWidget(this._description);
             },
 
             onBeforeShow: function (evt) {
                 this._initialItem = evt.args.initialItem || 0;
                 this._dontShowYet(evt);
+                this.setDescription(evt.args.description || "");
                 this._createCarousel(evt.args);
                 this.appendChildWidget(this._carousel);
                 this._addCarouselListeners();
@@ -69,6 +75,10 @@ require.def("sampleapp/appui/components/carouselcomponent",
                 // could set initial/aligned item from data source
                 this._setCarouselAlignedAndActiveItems(this._initialItem, this._initialItem);
                 this.show({});
+            },
+
+            setDescription: function (titleText) {
+                this._description.setText(titleText);
             },
 
             _addComponentListeners: function () {

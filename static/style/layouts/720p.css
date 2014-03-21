@@ -53,6 +53,7 @@
     top: 156px;
 }
 
+
 .description {
     top: 65px;
     font-size: 26px;
@@ -65,3 +66,15 @@
     left: 235px;
 }
 
+#carouselComponent > .carouselmask.horizontal {
+    width: 960px;
+}
+
+#carouselComponent > .carouselmask.vertical {
+    height: 600px;
+    width: 264px
+}
+
+#carouselComponent > .description {
+    margin-bottom: 64px;
+}
