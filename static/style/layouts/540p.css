@@ -66,3 +66,16 @@
     padding: 8px;
     left: 180px;
 }
+
+#carouselComponent > .carouselmask.horizontal {
+    width: 720px;
+}
+
+#carouselComponent > .carouselmask.vertical {
+    height: 450px;
+    width: 264px
+}
+
+#carouselComponent > .description {
+    margin-bottom: 32px;
+}

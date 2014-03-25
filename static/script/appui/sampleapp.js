@@ -51,6 +51,6 @@ require.def('sampleapp/appui/sampleapp',
                 // Create maincontainer and add simple component to it
                 this.addComponentContainer("maincontainer", "sampleapp/appui/components/simple");
             }
-        });     
+        });
     }
 );
