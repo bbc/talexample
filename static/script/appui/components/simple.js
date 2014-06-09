@@ -67,11 +67,19 @@ require.def("sampleapp/appui/components/simple",
                 });
                 playerButton.appendChildWidget(new Label("Simple Video Player Example"));
 
+                var horizontalProgressButton = new Button();
+                horizontalProgressButton.appendChildWidget(new Label("Horizontal Progress Bar Example"));
+                horizontalProgressButton.addEventListener("select", function(evt) {
+                    self.getCurrentApplication().pushComponent("maincontainer", "sampleapp/appui/components/horizontalprogresscomponent");
+                });
+
+
                 // Create a vertical list and append the buttons to navigate within the list
                 verticalListMenu = new VerticalList("mainMenuList");
                 verticalListMenu.appendChildWidget(newCarouselButton);
                 verticalListMenu.appendChildWidget(carouselButton);
                 verticalListMenu.appendChildWidget(playerButton);
+                verticalListMenu.appendChildWidget(horizontalProgressButton);
                 this.appendChildWidget(verticalListMenu);
 
                 // Add a 'beforerender' event listener to the component to do anything specific that might need to be done
