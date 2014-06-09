@@ -37,13 +37,13 @@ require.def("sampleapp/appui/components/horizontalprogresscomponent",
 
                 this._super("horizontalprogresscomponent");
 
-                this._progress = new HorizontalProgress("progressBar", true, 0);
-                this._progress.setText("My Progress Bar!");
-                this.appendChildWidget(this._progress);
-
                 var button = new Button(); // To take focus
                 button.appendChildWidget(new Label("Press SELECT to return to main menu."));
                 this.appendChildWidget(button);
+
+                this._progress = new HorizontalProgress("progressBar", true, 0);
+                this._progress.setText("My Progress Bar!");
+                this.appendChildWidget(this._progress);
 
                 var self = this;
 

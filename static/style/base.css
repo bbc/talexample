@@ -257,6 +257,9 @@ initial element background in the base stylesheet, not in dynamically loaded sty
 }
 
 #progressBar {
+    margin-top: 10%;
+    width: 50%;
+    margin-left: 25%;
     min-height: 10px;
     background: #070;
 }
