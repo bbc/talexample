@@ -255,3 +255,21 @@ initial element background in the base stylesheet, not in dynamically loaded sty
 .carouselwidgetstrip.vertical > .button {
     height: 200px;
 }
+
+#progressBar {
+    margin-top: 10%;
+    width: 50%;
+    margin-left: 25%;
+    min-height: 10px;
+    background: #070;
+}
+#progressBar_left {
+    min-height: 10px;
+    background: #700;
+}
+#progressBar_inner {
+    width: 10px;
+    min-height: 10px;
+    background: #777;
+    position: relative;
+}
