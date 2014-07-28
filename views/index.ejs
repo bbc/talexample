@@ -34,7 +34,7 @@
         staticLoadingScreen.parentNode.removeChild(staticLoadingScreen);
     }
 
-    require(['sampleapp/appui/sampleapp'], function(SampleApp) {
+    require(['<%- tal.app_id %>/appui/<%- tal.app_id %>'], function(SampleApp) {
         var app = new SampleApp(
             document.getElementById('app'),
             'static/style/',  // Base URL path for CSS files
