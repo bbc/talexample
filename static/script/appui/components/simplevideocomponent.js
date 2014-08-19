@@ -44,6 +44,7 @@ require.def("sampleapp/appui/components/simplevideocomponent",
                 // Get a reference to the current application and device objects
                 this._application = this.getCurrentApplication();
                 this._device = this._application.getDevice();
+                this._player;
 
                 // Create a a label add a class to it, this class can be used as a CSS selector
                 var description = new Label("Simple Video Component.");
@@ -95,27 +96,27 @@ require.def("sampleapp/appui/components/simplevideocomponent",
                 var videoType = "video/mp4";
 
                 // Create the device's video object, set the media sources and start loading the media
-                var player = this.createVideoPlayer();
-                player.setSources([new VideoSource(videoUrl, videoType)]);
-                player.load();
+                self._player = this.createVideoPlayer();
+                self._player.setSources([new VideoSource(videoUrl, videoType)]);
+                self._player.load();
             },
             getPlayer : function() {
                 return this._player;
             },
             destroyPlayer : function() {
-                this._player.destroy();
+                self._player.destroy();
                 this.removeChildWidget(this._player);
-                this._player = null;
+                self._player = null;
             },
             createVideoPlayer: function() {
-                var self = this;
+                //var self = this;
 
                 // Create the player and append it to the component
-                this._player = this._device.createPlayer('testPlayer', 'video');
-                this.appendChildWidget(this._player);
+                self._player = this._device.createMediaInterface('testPlayer', 'video');
+                this.appendChildWidget(self._player);
 
                 // Start playing the video as soon as the device fires an antie 'canplay' event
-                this._player.addEventListener('canplay', function(evt) {
+                self._player.addEventListener('canplay', function(evt) {
                     // Some devices have the player in the background behind the HTML page, we need to ensure the
                     // document body is transparent in order to see the video content
                     if (self._device.getPlayerEmbedMode() === Media.EMBED_MODE_BACKGROUND) {
