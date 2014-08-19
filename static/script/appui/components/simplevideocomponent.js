@@ -111,7 +111,7 @@ require.def("sampleapp/appui/components/simplevideocomponent",
                 var self = this;
 
                 // Create the player and append it to the component
-                this._player = this._device.createPlayer('testPlayer', 'video');
+                this._player = new Media('testPlayer', 'video');
                 this.appendChildWidget(this._player);
 
                 // Start playing the video as soon as the device fires an antie 'canplay' event
