@@ -1,0 +1,48 @@
+<%- tal.doctype %>
+<%- tal.rootTag %>
+<head>
+    <meta charset="utf-8"/>
+    <title>TAL Example App</title>
+    <%- tal.deviceHeaders %>
+    <link rel="stylesheet" href="static/style/base.css">
+
+    <script>
+        var antie = <%- JSON.stringify(tal.config) %>;
+        var require = {
+            baseUrl: '',
+            paths: {
+                <%- tal.app_id %>: "static/script",
+                antie:        "antie/static/script"
+            }
+        };
+    </script>
+</head>
+
+<body style='background: #000;'>
+<%- tal.deviceBody %>
+
+<div id='static-loading-screen' style='position: absolute; width: 100%; height: 100%; background: #000;'>
+    Application is loading...
+</div>
+
+<div id="app" class="display-none"></div>
+
+<script src="antie/static/script/lib/require.js"></script>
+<script>
+    function onReady() {
+        var staticLoadingScreen = document.getElementById('static-loading-screen');
+        staticLoadingScreen.parentNode.removeChild(staticLoadingScreen);
+    }
+
+    require(['<%- tal.app_id %>/appui/<%- tal.app_id %>'], function(SampleApp) {
+        var app = new SampleApp(
+            document.getElementById('app'),
+            'static/style/',  // Base URL path for CSS files
+            'static/img/',    // Base URL path for image files
+            onReady
+        );
+    });
+</script>
+</body>
+</html>
+

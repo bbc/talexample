@@ -5,7 +5,7 @@
   "description": "Example application for the TAL framwork.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,5 +21,12 @@
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/fmtvp/talexample/issues"
+  },
+  "dependencies": {
+    "consolidate": "^0.10.0",
+    "ejs": "^1.0.0",
+    "express": "^4.7.2",
+    "tal": "^0.3.1",
+    "tal-components": "git+https://github.com/oncletom/tal.git#remove-node"
   }
 }
