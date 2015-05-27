@@ -27,7 +27,6 @@
 var http = require('http');
 var url = require('url');
 var fs = require('fs');
-var path = require('path');
 
 // INIT AND CONFIG LOAD
 function returnResponse(url, response)
@@ -54,7 +53,7 @@ function returnResponse(url, response)
 	var device_model = "webkit";
 
 	// Split the url in order to get the brand and model (if applicable)
-	if (url.search != null)
+	if (url.search)
 	{
 		var parts = url.search.split("&");
 		var $_GET = {};
@@ -63,10 +62,12 @@ function returnResponse(url, response)
 			$_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
 		}
 
-		if ($_GET.indexOf('brand') > -1)
-			device_brand = $_GET['brand'];
-		if ($_GET.indexOf('model') > -1)
-			device_model = $_GET['model'];
+		if ($_GET.brand) {
+			device_brand = $_GET.brand;
+		}
+		if ($_GET.model > -1) {
+			device_model = $_GET.model;
+		}
 	}
 
 
@@ -78,29 +79,24 @@ function returnResponse(url, response)
 	// Construct filename from this and config path
 	var device_configuration_name = device_brand + "-" + device_model;
 	var device_configuration_file_path = "/devices";
+	var device_configuration;
 
 	// Load in device configuration
 	try
 	{
 		device_configuration = antie.getConfigurationFromFilesystem(device_configuration_name + "-default", device_configuration_file_path);
-		if(!device_configuration)
-		{
-			throw new Exception("Device " + device_configuration_name + " not supported");
-		}
 	}
 	catch(e)
 	{
 		response.write("Device configuration not supported: " + e);
+		return;
 	}
-
 
 	// Substitute appid wherever /%application%/ is present in device configuration
 	device_configuration = device_configuration.replace(/%application%/g, application_id);
 
 	// Decode to php object
-	device_configuration_decoded = JSON.parse(device_configuration);
-
-
+	var device_configuration_decoded = JSON.parse(device_configuration);
 
 	// PAGE GENERATION
 
@@ -161,7 +157,7 @@ function returnResponse(url, response)
 	response.write("</script>");
 	response.write("</body>");
 	response.write("</html>");
-};
+}
 
 http.createServer(function (req, res) {
 	var path = url.parse(req.url).pathname;
