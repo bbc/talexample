@@ -67,6 +67,14 @@ require.def("sampleapp/appui/components/simplevideocomponent",
                     self.getPlayer().pause();
                 });
 
+		var rewind = new Button('rewind');
+                rewind.appendChildWidget(new Label('-5s'));
+                playerControlButtons.appendChildWidget(rewind);
+                rewind.addEventListener('select', function(evt) {
+		  var currentTime = self.getPlayer().getCurrentTime();
+                  self.getPlayer().setCurrentTime(currentTime - 5);
+                });
+
                 var back = new Button('back');
                 back.appendChildWidget(new Label('BACK'));
                 playerControlButtons.appendChildWidget(back);
