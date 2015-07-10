@@ -75,6 +75,14 @@ require.def("sampleapp/appui/components/simplevideocomponent",
                   self.getPlayer().setCurrentTime(currentTime - 5);
                 });
 
+	        var fastForward = new Button('fastForward');
+                fastForward.appendChildWidget(new Label('+5s'));
+		  playerControlButtons.appendChildWidget(fastForward);
+		  fastForward.addEventListener('select', function(evt) {
+		    var currentTime = self.getPlayer().getCurrentTime();
+		    self.getPlayer().setCurrentTime(currentTime + 5);
+                });
+
                 var back = new Button('back');
                 back.appendChildWidget(new Label('BACK'));
                 playerControlButtons.appendChildWidget(back);
