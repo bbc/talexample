@@ -34,7 +34,7 @@ require.def("sampleapp/appui/components/simple",
         "sampleapp/appui/datasources/simplefeed"
     ],
     function (Component, Button, Label, VerticalList, Carousel, DataSource, SimpleFormatter, SimpleFeed) {
-        
+
         // All components extend Component
         return Component.extend({
             init: function () {
@@ -51,14 +51,6 @@ require.def("sampleapp/appui/components/simple",
                 welcomeLabel = new Label("welcomeLabel", "Welcome to your first TAL application!");
                 this.appendChildWidget(welcomeLabel);
 
-                // Create the buttons and add select event listeners
-                var carouselButton = new Button();
-                carouselButton.addEventListener("select", function(evt){
-                    self.getCurrentApplication().pushComponent("maincontainer", "sampleapp/appui/components/simplecarouselcomponent");
-                });
-                carouselButtonLabel = new Label("Simple Horizontal Carousel Example (deprecated)");
-                carouselButton.appendChildWidget(carouselButtonLabel);
-
                 var newCarouselButton = this._createCarouselButton();
 
                 var playerButton = new Button();
@@ -73,11 +65,9 @@ require.def("sampleapp/appui/components/simple",
                     self.getCurrentApplication().pushComponent("maincontainer", "sampleapp/appui/components/horizontalprogresscomponent");
                 });
 
-
                 // Create a vertical list and append the buttons to navigate within the list
                 verticalListMenu = new VerticalList("mainMenuList");
                 verticalListMenu.appendChildWidget(newCarouselButton);
-                verticalListMenu.appendChildWidget(carouselButton);
                 verticalListMenu.appendChildWidget(playerButton);
                 verticalListMenu.appendChildWidget(horizontalProgressButton);
                 this.appendChildWidget(verticalListMenu);
