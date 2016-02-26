@@ -27,19 +27,11 @@
 var http = require('http');
 var url = require('url');
 var fs = require('fs');
+var AntieFramework = require('tal');
 
 // INIT AND CONFIG LOAD
 function returnResponse(url, response)
 {
-	//Check TAL is available
-	if (!fs.existsSync('./antie/node/antieframework.js')) {
-    	response.write("antieframework.js can not be found.");
-    	response.write("Please install TAL to a folder 'antie' in your application's root");
-	}
-
-	// Check TAL is available
-    var AntieFramework = require('./antie/node/antieframework.js');
-
 	// Set up application ID and path to framework configuration directory
 	var application_id = "sampleapp";
 	var configPath = "antie/config";
