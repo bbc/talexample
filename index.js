@@ -34,10 +34,9 @@ function returnResponse(url, response)
 {
 	// Set up application ID and path to framework configuration directory
 	var application_id = "sampleapp";
-	var configPath = "antie/config";
-	var frameworkPath = "antie/config/framework/";
+	var configPath = "node_modules/tal/config";
 
-	var antie = new AntieFramework(configPath, frameworkPath);
+	var antie = new AntieFramework(configPath);
 
 	// Get brand and model from url parameters, or use
 	// brand = default, model = webkit
@@ -100,13 +99,13 @@ function returnResponse(url, response)
 				response.write("baseUrl: '',");
 				response.write("paths: {");
 					response.write(application_id + ": 'static/script',");
-					response.write("antie : 'antie/static/script'");
+					response.write("antie : 'node_modules/tal/static/script'");
 				response.write("},");
 				response.write("priority: [],");
 				response.write("callback: function() {}");
 			response.write("};");
 		response.write("</script>");
-		response.write("<script type='text/javascript' src='./antie/static/script/lib/require.js'></script>");
+		response.write("<script type='text/javascript' src='./node_modules/tal/static/script/lib/require.js'></script>");
 		response.write("<link rel='stylesheet' href='static/style/base.css'/>");
 
 		response.write("<script>");
