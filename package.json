@@ -23,6 +23,6 @@
     "url": "https://github.com/fmtvp/talexample/issues"
   },
   "dependencies": {
-    "tal": "fmtvp/tal#page-strategy-split"
+    "tal": "fmtvp/tal"
   }
 }
