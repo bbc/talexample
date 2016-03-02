@@ -1,7 +1,8 @@
 # Getting started
-
-> npm install
-> node index.js
+```
+npm install
+node index.js
+```
 
 Visit the URL provided.
 
