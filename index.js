@@ -46,7 +46,7 @@ function returnResponse(url, response)
 	// Split the url in order to get the brand and model (if applicable)
 	if (url.search)
 	{
-		var parts = url.search.split("&");
+		var parts = url.search.replace(/^\?/, '').split("&");
 		var $_GET = {};
 		for (var i = 0; i < parts.length; i++) {
 			var temp = parts[i].split("=");
@@ -56,7 +56,7 @@ function returnResponse(url, response)
 		if ($_GET.brand) {
 			device_brand = $_GET.brand;
 		}
-		if ($_GET.model > -1) {
+		if ($_GET.model) {
 			device_model = $_GET.model;
 		}
 	}
