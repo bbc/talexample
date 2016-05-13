@@ -1,12 +1,11 @@
 {
   "name": "talexample",
-  "private": true,
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Example application for the TAL framwork.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: There are no tests for this example app\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -23,6 +22,8 @@
     "url": "https://github.com/fmtvp/talexample/issues"
   },
   "dependencies": {
-    "tal": "fmtvp/tal"
+    "tal": "fmtvp/tal",
+    "express": "^4.13.4",
+    "mustache-express": "^1.2.2"
   }
 }
