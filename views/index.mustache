@@ -1,0 +1,62 @@
+{{{ root_html_tag }}}
+
+<head>
+
+  {{{ headers }}}
+
+  <script type='text/javascript'>
+    var require = {
+      baseUrl: '',
+      paths: {
+        {{{ application_id }}}: 'static/script',
+        antie : 'tal/static/script'
+      },
+      priority: [],
+      callback: function() {}
+    };
+  </script>
+
+  {{> imports}}
+
+  <script>
+    var antie = {
+      framework: {
+        deviceConfiguration: {{{ device_configuration }}}
+      }
+    };
+  </script>
+
+</head>
+
+<body style='background: #000;'>
+  {{{ extra_body }}}
+
+  <div id='static-loading-screen'>
+    <p>Application is loading...</p>
+  </div>
+
+  <div id="app" class="display-none"></div>
+
+  <script type='text/javascript'>
+    require(
+      ['sampleapp/appui/sampleapp'],
+      function(SampleApp) {
+        require.ready(function() {
+          var onReady = function() {
+            var staticLoadingScreen = document.getElementById('static-loading-screen');
+            staticLoadingScreen.parentNode.removeChild(staticLoadingScreen);
+          };
+
+          new SampleApp(
+            document.getElementById('app'),
+            'static/style/',
+            'static/img/',
+            onReady
+          );
+        });
+      }
+    );
+  </script>
+</body>
+
+</html>
