@@ -22,7 +22,7 @@
  * Please contact us for an alternative licence
  */
 
-require.def('sampleapp/appui/sampleapp',
+define('sampleapp/appui/sampleapp',
     [
         'antie/application',
         'antie/widgets/container'

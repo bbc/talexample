@@ -22,7 +22,7 @@
  * Please contact us for an alternative licence
  */
 
-require.def("sampleapp/appui/components/simple",
+define("sampleapp/appui/components/simple",
     [
         "antie/widgets/component",
         "antie/widgets/button",

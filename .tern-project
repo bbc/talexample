@@ -1,0 +1,20 @@
+{
+  "ecmaVersion": 5,
+  "libs": [],
+  "loadEagerly": [
+    "static/script/**",
+    "node_modules/tal/static/script/**"
+  ],
+  "dontLoad": [
+  ],
+  "plugins": {
+    "requirejs": {
+      "baseURL": "",
+      "paths": {
+        "antie": "node_modules/tal/static/script",
+        "sampleapp": "static/script"
+      },
+      "override": ""
+    }
+  }
+}

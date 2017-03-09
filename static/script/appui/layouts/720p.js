@@ -22,7 +22,7 @@
  * Please contact us for an alternative licence
  */
 
-require.def('sampleapp/appui/layouts/720p',
+define('sampleapp/appui/layouts/720p',
     {
         classes: [
             "layout720p"

@@ -22,7 +22,7 @@
  * Please contact us for an alternative licence
  */
 
-require.def("sampleapp/appui/datasources/simplefeed",
+define("sampleapp/appui/datasources/simplefeed",
     [
         "antie/class"
     ],

@@ -1,4 +1,4 @@
-require.def("sampleapp/appui/components/carouselcomponent",
+define("sampleapp/appui/components/carouselcomponent",
     [
         "antie/widgets/component",
         "antie/datasource",

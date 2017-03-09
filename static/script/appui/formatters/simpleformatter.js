@@ -22,7 +22,7 @@
  * Please contact us for an alternative licence
  */
 
-require.def("sampleapp/appui/formatters/simpleformatter",
+define("sampleapp/appui/formatters/simpleformatter",
     [
         "antie/formatter",
         "antie/widgets/label",
