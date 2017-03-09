@@ -31,9 +31,10 @@ define("sampleapp/appui/components/simple",
         "antie/widgets/carousel",
         "antie/datasource",
         "sampleapp/appui/formatters/simpleformatter",
-        "sampleapp/appui/datasources/simplefeed"
+        "sampleapp/appui/datasources/simplefeed",
+        "sampleapp/appui/components/simplebutton"
     ],
-    function (Component, Button, Label, VerticalList, Carousel, DataSource, SimpleFormatter, SimpleFeed) {
+    function (Component, Button, Label, VerticalList, Carousel, DataSource, SimpleFormatter, SimpleFeed, SimpleButton) {
 
         // All components extend Component
         return Component.extend({
@@ -51,7 +52,8 @@ define("sampleapp/appui/components/simple",
                 welcomeLabel = new Label("welcomeLabel", "Welcome to your first TAL application!");
                 this.appendChildWidget(welcomeLabel);
 
-                var newCarouselButton = this._createCarouselButton();
+                var simpleCarouselButton = this._createSimpleCarouselButton();
+                var hpCarouselButton = this._createHPCarouselButton();
 
                 var playerButton = new Button();
                 playerButton.addEventListener("select", function(evt){
@@ -67,7 +69,8 @@ define("sampleapp/appui/components/simple",
 
                 // Create a vertical list and append the buttons to navigate within the list
                 verticalListMenu = new VerticalList("mainMenuList");
-                verticalListMenu.appendChildWidget(newCarouselButton);
+                verticalListMenu.appendChildWidget(simpleCarouselButton);
+                verticalListMenu.appendChildWidget(hpCarouselButton);
                 verticalListMenu.appendChildWidget(playerButton);
                 verticalListMenu.appendChildWidget(horizontalProgressButton);
                 this.appendChildWidget(verticalListMenu);
@@ -86,27 +89,43 @@ define("sampleapp/appui/components/simple",
                 });
             },
 
-            _createCarouselButton: function () {
+            _createSimpleCarouselButton: function () {
                 var self = this;
                 function carouselExampleSelected() {
                     self.getCurrentApplication().pushComponent(
                         "maincontainer",
                         "sampleapp/appui/components/carouselcomponent",
-                        self._getCarouselConfig()
+                        self._getCarouselConfig("carouselComponent", Button)
                     );
                 }
 
-                var button = new Button('carouselButton');
-                button.appendChildWidget(new Label("Carousel Example"));
+                var button = new Button('simpleCarouselButton');
+                button.appendChildWidget(new Label("Simple Carousel Example"));
                 button.addEventListener('select', carouselExampleSelected);
                 return button;
             },
 
-            _getCarouselConfig: function () {
+            _createHPCarouselButton: function () {
+                var self = this;
+                function carouselExampleSelected() {
+                    self.getCurrentApplication().pushComponent(
+                        "maincontainer",
+                        "sampleapp/appui/components/carouselcomponent",
+                        self._getCarouselConfig("hpCarouselComponent", SimpleButton)
+                    );
+                }
+
+                var button = new Button('hpCarouselButton');
+                button.appendChildWidget(new Label("High Performance Carousel Example"));
+                button.addEventListener('select', carouselExampleSelected);
+                return button;
+            },
+
+            _getCarouselConfig: function (carouselName, buttonClass) {
                 return {
                     description: "Carousel example, LEFT and RIGHT to navigate, SELECT to go back",
                     dataSource: new DataSource(null, new SimpleFeed(), 'loadData'),
-                    formatter: new SimpleFormatter(),
+                    formatter: new SimpleFormatter(buttonClass),
                     orientation: Carousel.orientations.HORIZONTAL,
                     carouselId: 'verticalCullingCarousel',
                     animOptions: {
@@ -117,8 +136,9 @@ define("sampleapp/appui/components/simple",
                         normalisedWidgetAlignPoint: 0.5
                     },
                     initialItem: 4,
-                    type: "CULLING",
-                    lengths: 264
+                    type: "WRAPPING",
+                    lengths: 264,
+                    id: carouselName
                 };
             },
 

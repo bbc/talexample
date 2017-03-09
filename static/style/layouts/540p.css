@@ -71,11 +71,16 @@
     width: 720px;
 }
 
-#carouselComponent > .carouselmask.vertical {
+#hpCarouselComponent > .carouselmask.horizontal {
+    width: 720px;
+    padding: 8px;
+}
+
+#carouselComponent > .carouselmask.vertical, #hpCarouselComponent > .carouselmask.vertical {
     height: 450px;
     width: 264px
 }
 
-#carouselComponent > .description {
+#carouselComponent > .description, #hpCarouselComponent > .description {
     margin-bottom: 32px;
 }

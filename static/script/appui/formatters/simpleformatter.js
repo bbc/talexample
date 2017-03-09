@@ -26,15 +26,18 @@ define("sampleapp/appui/formatters/simpleformatter",
     [
         "antie/formatter",
         "antie/widgets/label",
-        "antie/widgets/button",
         "antie/widgets/image"
     ],
-    function(Formatter, Label, Button, Image) {
+    function(Formatter, Label, Image) {
         return Formatter.extend({
+            init: function(buttonClass) {
+                this._super();
+                this._buttonClass = buttonClass;
+            },
             format : function (iterator) {
                 var button, item;
                 item = iterator.next();
-                button = new Button("fruit" + item.id);
+                button = new this._buttonClass("fruit" + item.id);
                 button.appendChildWidget(new Image("img-item.id", item.img, { width : 200, height: 200}));
                 button.appendChildWidget(new Label(item.title));
                 return button;

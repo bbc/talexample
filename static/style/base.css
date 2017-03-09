@@ -178,6 +178,36 @@ initial element background in the base stylesheet, not in dynamically loaded sty
     color: #000000;
 }
 
+.simpleButtonBackground {
+    background-color: #DCDCDC;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -2;
+    transform: translateZ(0);
+}
+
+#hpCarouselComponent .button {
+    background-color: transparent;
+    padding: 0px;
+    transform: translateZ(0);
+    position: relative;
+}
+
+.simpleButtonFocussedBackground {
+    background-color: #FFD700;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    transform: translateZ(0);
+}
+
+#hpCarouselComponent .buttonFocussed {
+    transform: translateZ(0) scale(1.1);
+    z-index: 2;
+}
+
 .buttonFocussed.menuendpoint {
     background-color: #FFD700;
 }
@@ -249,16 +279,16 @@ initial element background in the base stylesheet, not in dynamically loaded sty
     display: inline-block;
 }
 
-#carouselComponent {
+#carouselComponent, #hpCarouselComponent {
     position: relative;
 }
 
-#carouselComponent > .carouselmask {
+#carouselComponent > .carouselmask, #hpCarouselComponent > .carouselmask {
     margin-left: auto;
     margin-right: auto;
 }
 
-#carouselComponent > .description {
+#carouselComponent > .description, #hpCarouselComponent> .description {
     position: static;
 }
 
