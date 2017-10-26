@@ -1,11 +1,24 @@
-# Getting started
+# Example TAL Application
+
+An example TV application using the [TAL](https://www.github.com/bbc/tal) framework from the BBC.
+
+<img src="./assets/main.png" width="500">
+
+<img src="./assets/carousel.png" width="500">
+
+<img src="./assets/playback.png" width="500">
+
+# Getting Started
+
 ```
+git clone git@github.com:bbc/talexample.git
+cd talexample
 npm install
-node index.js
+npm start
 ```
 
-Visit the URL provided.
+Visit http://localhost:1337 in your browser. Use the UP, DOWN, LEFT, RIGHT keys to navigate, use ENTER/RETURN to select.
 
-# More information
+# More Information
 
-See [http://fmtvp.github.com/tal/](http://fmtvp.github.com/tal/) for documentation
+See [github.com/bbc/tal](https://www.github.com/bbc/tal) or [bbc.github.io/tal](http://bbc.github.io/tal/getting-started/introducing-tal.html) for documentation.
