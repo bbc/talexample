@@ -33,9 +33,8 @@ require.def("sampleapp/appui/components/horizontalprogresscomponent",
 
         // All components extend Component
         return Component.extend({
-            init: function () {
-
-                this._super("horizontalprogresscomponent");
+            init: function init () {
+                init.base.call(this, "horizontalprogresscomponent");
 
                 var button = new Button(); // To take focus
                 button.appendChildWidget(new Label("Press SELECT to return to main menu."));

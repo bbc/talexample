@@ -22,7 +22,7 @@
     "url": "https://github.com/fmtvp/talexample/issues"
   },
   "dependencies": {
-    "tal": "fmtvp/tal",
+    "tal": "8.0.0",
     "express": "^4.13.4",
     "mustache-express": "^1.2.2"
   }

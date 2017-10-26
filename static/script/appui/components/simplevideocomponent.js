@@ -29,17 +29,18 @@ require.def("sampleapp/appui/components/simplevideocomponent",
         "antie/widgets/label",
         "antie/widgets/horizontallist",
         "antie/videosource",
-        "antie/widgets/media"
+        "antie/devices/mediaplayer/mediaplayer",
+        "antie/runtimecontext"
     ],
-    function (Component, Button, Label, HorizontalList, VideoSource, Media) {
+    function (Component, Button, Label, HorizontalList, VideoSource, MediaPlayer, RuntimeContext) {
 
         // All components extend Component
         return Component.extend({
-            init: function () {
+            init: function init () {
                 var self = this;
 
                 // It is important to call the constructor of the superclass
-                this._super("simplevideocomponent");
+                init.base.call(this, "simplevideocomponent");
 
                 // Get a reference to the current application and device objects
                 this._application = this.getCurrentApplication();
@@ -57,7 +58,7 @@ require.def("sampleapp/appui/components/simplevideocomponent",
                 play.appendChildWidget(new Label('PLAY'));
                 playerControlButtons.appendChildWidget(play);
                 play.addEventListener('select', function(evt) {
-                    self.getPlayer().play();
+                    self.getPlayer().resume();
                 });
 
                 var pause = new Button('pause');
@@ -72,25 +73,21 @@ require.def("sampleapp/appui/components/simplevideocomponent",
                 playerControlButtons.appendChildWidget(rewind);
                 rewind.addEventListener('select', function(evt) {
 		  var currentTime = self.getPlayer().getCurrentTime();
-                  self.getPlayer().setCurrentTime(currentTime - 5);
+                  self.getPlayer().playFrom(currentTime - 5);
                 });
 
-	        var fastForward = new Button('fastForward');
+                var fastForward = new Button('fastForward');
                 fastForward.appendChildWidget(new Label('+5s'));
-		  playerControlButtons.appendChildWidget(fastForward);
+	              playerControlButtons.appendChildWidget(fastForward);
 		  fastForward.addEventListener('select', function(evt) {
 		    var currentTime = self.getPlayer().getCurrentTime();
-		    self.getPlayer().setCurrentTime(currentTime + 5);
+		    self.getPlayer().playFrom(currentTime + 5);
                 });
 
                 var back = new Button('back');
                 back.appendChildWidget(new Label('BACK'));
                 playerControlButtons.appendChildWidget(back);
                 back.addEventListener('select', function(evt) {
-                    if (self._device.getPlayerEmbedMode() === Media.EMBED_MODE_BACKGROUND) {
-                        self.showBackground();
-                    }
-
                     // Make sure we destroy the player before exiting
                     self.destroyPlayer();
                     self.parentWidget.back();
@@ -111,39 +108,16 @@ require.def("sampleapp/appui/components/simplevideocomponent",
                 var videoType = "video/mp4";
 
                 // Create the device's video object, set the media sources and start loading the media
-                var player = this.createVideoPlayer();
-                player.setSources([new VideoSource(videoUrl, videoType)]);
-                player.load();
+                var player = this.getPlayer()
+                player.setSource('video', videoUrl, videoType);
+                player.beginPlayback();
             },
             getPlayer : function() {
-                return this._player;
+                return RuntimeContext.getDevice().getMediaPlayer();
             },
             destroyPlayer : function() {
-                this._player.destroy();
-                this.removeChildWidget(this._player);
-                this._player = null;
-            },
-            createVideoPlayer: function() {
-                var self = this;
-
-                // Create the player and append it to the component
-                this._player = new Media('testPlayer', 'video');
-                this.appendChildWidget(this._player);
-
-                // Start playing the video as soon as the device fires an antie 'canplay' event
-                this._player.addEventListener('canplay', function(evt) {
-                    // Some devices have the player in the background behind the HTML page, we need to ensure the
-                    // document body is transparent in order to see the video content
-                    if (self._device.getPlayerEmbedMode() === Media.EMBED_MODE_BACKGROUND) {
-                        self.hideBackground();
-                    }
-
-                    // Start playing the media
-                    self._player.play();
-                });
-
-                // Return a reference to the player object so we can set and load the media source
-                return this._player;
+                this.getPlayer().stop();
+                this.getPlayer().reset();
             },
             hideBackground : function() {
                 this._device.addClassToElement(document.body, 'background-none');

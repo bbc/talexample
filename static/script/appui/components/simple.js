@@ -37,12 +37,13 @@ require.def("sampleapp/appui/components/simple",
 
         // All components extend Component
         return Component.extend({
-            init: function () {
+            init: function init () {
                 var self, helloWorldLabel, welcomeLabel, carouselButtonLabel, verticalListMenu;
 
                 self = this;
+
                 // It is important to call the constructor of the superclass
-                this._super("simplecomponent");
+                init.base.call(this, "simplecomponent");
 
                 // Add the labels to the component
                 helloWorldLabel = new Label("helloWorldLabel", "Hello World");

@@ -33,8 +33,9 @@ require.def("sampleapp/appui/components/carouselcomponent",
 
         var CarouselComponent;
         CarouselComponent = Component.extend({
-            init: function () {
-                this._super('carouselComponent');
+            init: function init () {
+                init.base.call(this, 'carouselComponent');
+
                 this._addComponentListeners();
                 this._description = new Label();
                 this._description.addClass('description');
@@ -223,4 +224,3 @@ require.def("sampleapp/appui/components/carouselcomponent",
         return CarouselComponent;
     }
 );
-

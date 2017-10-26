@@ -41,19 +41,17 @@
     require(
       ['sampleapp/appui/sampleapp'],
       function(SampleApp) {
-        require.ready(function() {
-          var onReady = function() {
-            var staticLoadingScreen = document.getElementById('static-loading-screen');
-            staticLoadingScreen.parentNode.removeChild(staticLoadingScreen);
-          };
+        var onReady = function() {
+          var staticLoadingScreen = document.getElementById('static-loading-screen');
+          staticLoadingScreen.parentNode.removeChild(staticLoadingScreen);
+        };
 
-          new SampleApp(
-            document.getElementById('app'),
-            'static/style/',
-            'static/img/',
-            onReady
-          );
-        });
+        new SampleApp(
+          document.getElementById('app'),
+          'static/style/',
+          'static/img/',
+          onReady
+        );
       }
     );
   </script>
