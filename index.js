@@ -50,7 +50,7 @@ app.get('/', function (req, res) {
   try {
     deviceConfiguration = antie.getConfigurationFromFilesystem(deviceBrand + '-' + deviceModel + '-default', '/devices')
   } catch (e) {
-    res.status(406).render('error', {
+    res.status(404).render('error', {
       exception: e
     })
 
