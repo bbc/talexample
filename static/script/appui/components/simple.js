@@ -38,18 +38,16 @@ define(
     // All components extend Component
     return Component.extend({
       init: function init () {
-        var self, helloWorldLabel, welcomeLabel, verticalListMenu
-
-        self = this
+        var self = this
 
         // It is important to call the constructor of the superclass
         init.base.call(this, 'simplecomponent')
 
         // Add the labels to the component
-        helloWorldLabel = new Label('helloWorldLabel', 'Hello World')
+        var helloWorldLabel = new Label('helloWorldLabel', 'Hello World')
         this.appendChildWidget(helloWorldLabel)
 
-        welcomeLabel = new Label('welcomeLabel', 'Welcome to your first TAL application!')
+        var welcomeLabel = new Label('welcomeLabel', 'Welcome to your first TAL application!')
         this.appendChildWidget(welcomeLabel)
 
         var newCarouselButton = this._createCarouselButton()
@@ -67,7 +65,7 @@ define(
         })
 
         // Create a vertical list and append the buttons to navigate within the list
-        verticalListMenu = new VerticalList('mainMenuList')
+        var verticalListMenu = new VerticalList('mainMenuList')
         verticalListMenu.appendChildWidget(newCarouselButton)
         verticalListMenu.appendChildWidget(playerButton)
         verticalListMenu.appendChildWidget(horizontalProgressButton)
