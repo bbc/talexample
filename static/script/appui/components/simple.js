@@ -113,7 +113,6 @@ define(
             normalisedWidgetAlignPoint: 0.5
           },
           initialItem: 4,
-          type: "CULLING",
           lengths: 264
         };
       }
