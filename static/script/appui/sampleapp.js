@@ -37,6 +37,7 @@ define(
         this.setRootWidget(container)
         // Create maincontainer and add simple component to it
         this.addComponentContainer('maincontainer', 'sampleapp/appui/components/simple')
+        this.ready()
       }
     })
   }

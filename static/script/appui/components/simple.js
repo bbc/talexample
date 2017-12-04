@@ -70,13 +70,6 @@ define(
         verticalListMenu.appendChildWidget(playerButton)
         verticalListMenu.appendChildWidget(horizontalProgressButton)
         this.appendChildWidget(verticalListMenu)
-
-        // calls Application.ready() the first time the component is shown
-        // the callback removes itself once it's fired to avoid multiple calls.
-        this.addEventListener('aftershow', function appReady (evt) {
-          self.getCurrentApplication().ready()
-          self.removeEventListener('aftershow', appReady)
-        })
       },
 
       _createCarouselButton: function () {
