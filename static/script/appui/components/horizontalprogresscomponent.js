@@ -23,61 +23,59 @@
 */
 
 define(
-  "sampleapp/appui/components/horizontalprogresscomponent",
+  'sampleapp/appui/components/horizontalprogresscomponent',
   [
-    "antie/widgets/component",
-    "antie/widgets/horizontalprogress",
-    "antie/widgets/label",
-    "antie/widgets/button"
+    'antie/widgets/component',
+    'antie/widgets/horizontalprogress',
+    'antie/widgets/label',
+    'antie/widgets/button'
   ],
   function (Component, HorizontalProgress, Label, Button) {
-
     return Component.extend({
       init: function init () {
-        init.base.call(this, "horizontalprogresscomponent");
+        init.base.call(this, 'horizontalprogresscomponent')
 
-        var button = new Button();
-        button.appendChildWidget(new Label("Press SELECT to return to main menu."));
-        this.appendChildWidget(button);
+        var button = new Button()
+        button.appendChildWidget(new Label('Press SELECT to return to main menu.'))
+        this.appendChildWidget(button)
 
-        this._progress = new HorizontalProgress("progressBar", true, 0);
-        this._progress.setText("My Progress Bar!");
-        this.appendChildWidget(this._progress);
+        this._progress = new HorizontalProgress('progressBar', true, 0)
+        this._progress.setText('My Progress Bar!')
+        this.appendChildWidget(this._progress)
 
-        var self = this;
+        var self = this
 
-        this.addEventListener("aftershow", function (evt) {
-          self._onAfterShow(evt);
-        });
+        this.addEventListener('aftershow', function (evt) {
+          self._onAfterShow(evt)
+        })
 
-        this.addEventListener("beforehide", function (evt) {
-          self._onBeforeHide(evt);
-        });
+        this.addEventListener('beforehide', function (evt) {
+          self._onBeforeHide(evt)
+        })
 
-        this.addEventListener("select", function(evt) {
-          self.parentWidget.back();
-        });
+        this.addEventListener('select', function (evt) {
+          self.parentWidget.back()
+        })
       },
 
       _onAfterShow: function () {
-        this._progress.setValue(0.0);
-        var self = this;
+        this._progress.setValue(0.0)
+        var self = this
 
-        this._intervalID = setInterval( function() {
-          var value = self._progress.getValue() + 0.1;
+        this._intervalID = setInterval(function () {
+          var value = self._progress.getValue() + 0.1
 
           if (value > 1.0) {
-            value = 1.0;
+            value = 1.0
           }
 
-          self._progress.setValue(value);
-        }, 1000);
+          self._progress.setValue(value)
+        }, 1000)
       },
 
       _onBeforeHide: function () {
-        clearInterval(this._intervalID);
+        clearInterval(this._intervalID)
       }
-    });
-
+    })
   }
-);
+)
