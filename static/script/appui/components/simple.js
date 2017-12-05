@@ -58,17 +58,10 @@ define(
         })
         playerButton.appendChildWidget(new Label('Simple Video Player Example'))
 
-        var horizontalProgressButton = new Button()
-        horizontalProgressButton.appendChildWidget(new Label('Horizontal Progress Bar Example'))
-        horizontalProgressButton.addEventListener('select', function (evt) {
-          self.getCurrentApplication().pushComponent('maincontainer', 'sampleapp/appui/components/horizontalprogresscomponent')
-        })
-
         // Create a vertical list and append the buttons to navigate within the list
         var verticalListMenu = new VerticalList('mainMenuList')
         verticalListMenu.appendChildWidget(newCarouselButton)
         verticalListMenu.appendChildWidget(playerButton)
-        verticalListMenu.appendChildWidget(horizontalProgressButton)
         this.appendChildWidget(verticalListMenu)
       },
 

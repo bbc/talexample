@@ -31,9 +31,10 @@ define(
     'antie/widgets/horizontallist',
     'antie/videosource',
     'antie/devices/mediaplayer/mediaplayer',
-    'antie/runtimecontext'
+    'antie/runtimecontext',
+    'antie/widgets/horizontalprogress'
   ],
-  function (Component, Button, Label, HorizontalList, VideoSource, MediaPlayer, RuntimeContext) {
+  function (Component, Button, Label, HorizontalList, VideoSource, MediaPlayer, RuntimeContext, HorizontalProgress) {
     return Component.extend({
       init: function init () {
         var self = this
@@ -52,6 +53,10 @@ define(
 
         // Create a horizontal list that contains buttons to control the video
         var playerControlButtons = new HorizontalList('playerButtons')
+
+        // video progress
+        this._progress = new HorizontalProgress('progressBar', true, 0)
+        playerControlButtons.appendChildWidget(this._progress)
 
         var play = new Button('play')
         play.appendChildWidget(new Label('PLAY'))
@@ -99,6 +104,10 @@ define(
         this.addEventListener('beforerender', function (evt) {
           self._onBeforeRender(evt)
         })
+
+        this.addEventListener('aftershow', function (evt) {
+          self._onAfterShow(evt)
+        })
       },
 
       _onBeforeRender: function (ev) {
@@ -106,6 +115,16 @@ define(
         var player = this.getPlayer()
         player.setSource('video', 'static/mp4/spinning-logo.mp4', 'video/mp4')
         player.beginPlayback()
+      },
+
+      _onAfterShow: function () {
+        var player = this.getPlayer()
+        var self = this
+        player.addEventCallback(this, function (event) {
+          if (event.type === MediaPlayer.EVENT.STATUS) {
+            self._progress.setValue(event.currentTime / player.getDuration())
+          }
+        })
       },
 
       getPlayer: function () {
