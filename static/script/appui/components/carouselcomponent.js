@@ -77,14 +77,6 @@ define(
         var handler = new ActivateFirstHandler()
         handler.setAnimationOptions(animOptions)
         handler.attach(this._carousel)
-      },
-
-      _addListenersTo: function (target, listenerMap) {
-        for (var eventName in listenerMap) {
-          if (listenerMap.hasOwnProperty(eventName)) {
-            target.addEventListener(eventName, listenerMap[eventName])
-          }
-        }
       }
     })
   }

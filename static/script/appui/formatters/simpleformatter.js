@@ -30,12 +30,13 @@ define(
     'antie/widgets/image'
   ],
   function (Label, Button, Image) {
+    var unique = 0
     return function () {
       return {
         format: function (iterator) {
           var button, item
           item = iterator.next()
-          button = new Button('fruit' + item.id)
+          button = new Button('fruit' + item.id + '-' + unique++)
           button.appendChildWidget(new Image('img-item.id', item.img, { width: 200, height: 200 }))
           button.appendChildWidget(new Label(item.title))
           return button

@@ -32,14 +32,12 @@ define(
     'antie/widgets/carousel',
     'antie/datasource',
     'sampleapp/appui/formatters/simpleformatter',
-    'sampleapp/appui/datasources/simplefeed'
+    'sampleapp/appui/datasources/fruitdata'
   ],
-  function (Component, Button, Label, VerticalList, Carousel, DataSource, SimpleFormatter, SimpleFeed) {
+  function (Component, Button, Label, VerticalList, Carousel, DataSource, SimpleFormatter, FruitData) {
     // All components extend Component
     return Component.extend({
       init: function init () {
-        var self = this
-
         // It is important to call the constructor of the superclass
         init.base.call(this, 'simplecomponent')
 
@@ -50,54 +48,97 @@ define(
         var welcomeLabel = new Label('welcomeLabel', 'Welcome to your first TAL application!')
         this.appendChildWidget(welcomeLabel)
 
-        var newCarouselButton = this._createCarouselButton()
-
-        var playerButton = new Button()
-        playerButton.addEventListener('select', function (evt) {
-          self.getCurrentApplication().pushComponent('maincontainer', 'sampleapp/appui/components/simplevideocomponent')
-        })
-        playerButton.appendChildWidget(new Label('Simple Video Player Example'))
-
         // Create a vertical list and append the buttons to navigate within the list
         var verticalListMenu = new VerticalList('mainMenuList')
-        verticalListMenu.appendChildWidget(newCarouselButton)
-        verticalListMenu.appendChildWidget(playerButton)
+        verticalListMenu.appendChildWidget(this._createCarouselButton())
+        verticalListMenu.appendChildWidget(this._createPlayerButton())
+        verticalListMenu.appendChildWidget(this._createGridButton())
+        verticalListMenu.appendChildWidget(this._createGridWidgetButton())
         this.appendChildWidget(verticalListMenu)
       },
 
+      _createPlayerButton: function () {
+        function playerButtonSelected (evt) {
+          this.getCurrentApplication().pushComponent(
+            'maincontainer',
+            'sampleapp/appui/components/simplevideocomponent'
+          )
+        }
+        var playerButton = new Button()
+        playerButton.addEventListener('select', playerButtonSelected.bind(this))
+        playerButton.appendChildWidget(new Label('Simple Video Player Example'))
+        return playerButton
+      },
+
       _createCarouselButton: function () {
-        var self = this
+        // this is the most basic carousel example, but shows most features available
+        // to the carousels
+        // (see: http://bbc.github.io/tal/widgets/carousel.html)
         function carouselExampleSelected () {
-          self.getCurrentApplication().pushComponent(
+          this.getCurrentApplication().pushComponent(
             'maincontainer',
             'sampleapp/appui/components/carouselcomponent',
-            self._getCarouselConfig()
+            {
+              description: 'Carousel example, LEFT and RIGHT to navigate, SELECT to go back',
+              dataSource: FruitData,
+              formatter: new SimpleFormatter(),
+              orientation: Carousel.orientations.HORIZONTAL,
+              carouselId: 'verticalCullingCarousel',
+              animOptions: {
+                skipAnim: false
+              },
+              alignment: {
+                normalisedAlignPoint: 0.5,
+                normalisedWidgetAlignPoint: 0.5
+              },
+              initialItem: 4,
+              lengths: 264
+            }
           )
         }
 
         var button = new Button('carouselButton')
         button.appendChildWidget(new Label('Carousel Example'))
-        button.addEventListener('select', carouselExampleSelected)
+        button.addEventListener('select', carouselExampleSelected.bind(this))
         return button
       },
 
-      _getCarouselConfig: function () {
-        return {
-          description: 'Carousel example, LEFT and RIGHT to navigate, SELECT to go back',
-          dataSource: new DataSource(null, new SimpleFeed(), 'loadData'),
-          formatter: new SimpleFormatter(),
-          orientation: Carousel.orientations.HORIZONTAL,
-          carouselId: 'verticalCullingCarousel',
-          animOptions: {
-            skipAnim: false
-          },
-          alignment: {
-            normalisedAlignPoint: 0.5,
-            normalisedWidgetAlignPoint: 0.5
-          },
-          initialItem: 4,
-          lengths: 264
+      _createGridButton: function () {
+        // A question frequently asked is how to create "grids" of carousels
+        // and how to use them.
+        // There are two ways to use a Component
+        // pushed (as shown here)
+        // or directly (as shown with components/componentwithscrollinggridwidget.js)
+        function carouselExampleSelected () {
+          // in this example we push the scrolling grid component
+          // directly into the main container.
+          this.getCurrentApplication().pushComponent(
+            'maincontainer',
+            'sampleapp/appui/components/scrollinggrid'
+          )
         }
+
+        var button = new Button('gridButton')
+        button.appendChildWidget(new Label('Grid Example'))
+        button.addEventListener('select', carouselExampleSelected.bind(this))
+        return button
+      },
+
+      _createGridWidgetButton: function () {
+        function carouselExampleSelected () {
+          // however down here (in contrast to _createGridButton)
+          // we push a component that uses the scrolling grid as a
+          // direct child widget
+          this.getCurrentApplication().pushComponent(
+            'maincontainer',
+            'sampleapp/appui/components/componentwithscrollinggridwidget'
+          )
+        }
+
+        var button = new Button('gridWidgetButton')
+        button.appendChildWidget(new Label('Grid As A Widget Example'))
+        button.addEventListener('select', carouselExampleSelected.bind(this))
+        return button
       }
     })
   }
