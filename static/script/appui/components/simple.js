@@ -83,7 +83,7 @@ define(
               dataSource: FruitData,
               formatter: new SimpleFormatter(),
               orientation: Carousel.orientations.HORIZONTAL,
-              carouselId: 'verticalCullingCarousel',
+              carouselId: 'horizontalCullingCarousel',
               animOptions: {
                 skipAnim: false
               },
