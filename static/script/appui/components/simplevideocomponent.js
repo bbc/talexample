@@ -104,8 +104,9 @@ define(
 
       _onBeforeRender: function (ev) {
         // Create the device's video object, set the media sources and start loading the media
+        var videoContainer = RuntimeContext.getCurrentApplication().getRootWidget().outputElement;
         var player = this.getPlayer()
-        player.setSource('video', "static/mp4/spinning-logo.mp4", "video/mp4");
+        player.initialiseMedia('video', "static/mp4/spinning-logo.mp4", "video/mp4", videoContainer);
         player.beginPlayback();
       },
 
