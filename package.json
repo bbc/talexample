@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/fmtvp/talexample.git"
+    "url": "git://github.com/bbc/talexample.git"
   },
   "keywords": [
     "tal",
@@ -19,7 +19,7 @@
   "author": "BBC Future Media",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/fmtvp/talexample/issues"
+    "url": "https://github.com/bbc/talexample/issues"
   },
   "dependencies": {
     "tal": "9.0.0",

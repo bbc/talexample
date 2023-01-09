@@ -3,7 +3,7 @@
 * (http://www.bbc.co.uk) and TAL Contributors (1)
 *
 * (1) TAL Contributors are listed in the AUTHORS file and at
-*     https://github.com/fmtvp/TAL/AUTHORS - please extend this file,
+*     https://github.com/bbc/TAL/AUTHORS - please extend this file,
 *     not this notice.
 *
 * @license Licensed under the Apache License, Version 2.0 (the "License");

@@ -1,4 +1,4 @@
 [submodule "antie"]
 	path = antie
-	url = https://github.com/fmtvp/tal.git
+	url = https://github.com/bbc/tal.git
 	branch = master
