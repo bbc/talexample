@@ -4,12 +4,6 @@
 
 An example TV application using the [TAL](https://www.github.com/bbc/tal) framework from the BBC.
 
-<img src="./assets/main.png" width="500">
-
-<img src="./assets/carousel.png" width="500">
-
-<img src="./assets/playback.png" width="500">
-
 # Deprecation Announcement 09/01/2023
 
 On 12/12/2022 we announced the deprecation of [TAL](https://github.com/bbc/tal/), on which this repository is based.
@@ -25,6 +19,14 @@ We will answer any questions found in the issues backlog as best we can. There w
 can use to contact us. This readme will be updated when this becomes available. 
 
 ---
+
+<img src="./assets/main.png" width="500">
+
+<img src="./assets/carousel.png" width="500">
+
+<img src="./assets/playback.png" width="500">
+
+
 
 # Getting Started
 
