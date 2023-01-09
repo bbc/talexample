@@ -10,16 +10,16 @@ An example TV application using the [TAL](https://www.github.com/bbc/tal) framew
 
 <img src="./assets/playback.png" width="500">
 
-# Deprecation Announcement 12/12/2022
+# Deprecation Announcement 09/01/2023
 
 On 12/12/2022 we announced the deprecation of [TAL](https://github.com/bbc/tal/), on which this repository is based.
 This will allow us to concentrate on future work, which we hope to share details of soon.
 
-We apologise that we were not active in keeping the TAL community up to date with the status of the
-project. Going forward, we will provide regular updates on the future of TAL. 
+We apologise that we were not active in keeping the TAL community up to date with the status of these
+projects. Going forward, we will provide regular updates on the future of TAL. 
 
-As part of the deprecation, pull requests will be disabled and outstanding issues will be closed as with the parent repository.
-TAL or this example will not be actively maintained. 
+As part of the deprecation, pull requests will be disabled and outstanding issues will be closed.
+TAL and this example repository will not be actively maintained. 
 
 We will answer any questions found in the issues backlog as best we can. There will soon be a email address you
 can use to contact us. This readme will be updated when this becomes available. 
