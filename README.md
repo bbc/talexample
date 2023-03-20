@@ -4,6 +4,11 @@
 
 An example TV application using the [TAL](https://www.github.com/bbc/tal) framework from the BBC.
 
+## Contact us at BBC TV Open Source 20/03/2023
+
+We have now created a mailbox where you can [contact us](mailto:tvopensource@bbc.co.uk) with any questions related to TAL or the
+future of this project. We hope to share some details of the replacement to TAL soon.
+
 # Deprecation Announcement 09/01/2023
 
 On 12/12/2022 we announced the deprecation of [TAL](https://github.com/bbc/tal/), on which this repository is based.
